@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> 35a0997ceba2a60fec13a93c9099d86a9c4766ee
     <div className="min-h-screen relative overflow-hidden">
       
       {/* Animated background */}
