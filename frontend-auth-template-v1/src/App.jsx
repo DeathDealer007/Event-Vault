@@ -11,7 +11,7 @@ import { CreateEvent } from "./pages/CreateEvent";
 import { RegisterParticipant } from "./pages/RegisterParticipant";
 
 import { Navbar } from "./components/navbar";
-import Loader from "./components/loader"; // ✅ your route transition loader
+import Loader from "./components/Loader"; // ✅ your route transition loader
 
 // 👇 Extracted AppRoutes to use inside BrowserRouter
 const AppRoutes = () => {
