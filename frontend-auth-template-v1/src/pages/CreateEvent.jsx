@@ -80,9 +80,13 @@ const CreateEvent = () => {
 
             <div className="max-w-4xl mx-auto relative z-10">
                 <div className="text-center mb-8 animate-fade-in-up">
-                    <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-                        <span className="text-3xl text-white">📅</span>
-                    </div>
+                   <div className="w-24 h-24 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow overflow-hidden">
+            <img 
+              src="/logo.jpg" 
+              alt="EventVault Logo" 
+              className="h-16 w-16 object-cover rounded-full"
+            />
+          </div>
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
                         Create Event
                     </h1>

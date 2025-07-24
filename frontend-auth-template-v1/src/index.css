@@ -146,3 +146,35 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #1E40AF, #1E3A8A);
 }
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+.input-field {
+  @apply border px-3 py-2 rounded w-full;
+}
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700;
+}
+.btn-secondary {
+  @apply bg-gray-300 text-black px-4 py-1 rounded hover:bg-gray-400;
+}
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700;
+}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden"> 
       
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"></div>
@@ -50,14 +50,16 @@ const HomePage = () => {
           </Link>
           
           <Link to="/admin" className="group">
-            <div className="card p-8 text-center hover-lift group-hover:scale-105 transition-all duration-300">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-2xl text-white">⚙️</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Admin Panel</h3>
-              <p className="text-gray-600">Manage events, users, and system settings with powerful admin tools.</p>
-            </div>
-          </Link>
+  <div className="card p-8 text-center hover-lift group-hover:scale-105 transition-all duration-300">
+    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+      <span className="text-2xl text-white">⚙️</span>
+    </div>
+    <h3 className="text-xl font-semibold text-gray-800 mb-2">Admin Panel</h3>
+    <p className="text-gray-600">
+      Manage events, users, and system settings with powerful admin tools.
+    </p>
+  </div>
+</Link>
         </div>
         
         {/* Stats Section */}
