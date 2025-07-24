@@ -67,9 +67,14 @@ const SignupPage = () => {
             
             <div className="card p-8 w-full max-w-md animate-fade-in-up relative z-10">
                 <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-                        <span className="text-2xl text-white">🚀</span>
-                    </div>
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+  <img
+    src="/logo.jpg"
+    alt="Logo"
+    className="w-10 h-10 object-contain rounded-full"
+  />
+</div>
+
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                         Join EventVault
                     </h1>
