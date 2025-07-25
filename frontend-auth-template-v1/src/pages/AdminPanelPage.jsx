@@ -71,37 +71,37 @@ const AdminPanelPage = () => {
   if (!user.isAuthenticated) return <Navigate to="/login" />;
   if (user.email !== ADMIN_EMAIL) {
     return (
-      <h2 className="text-center text-red-500 mt-10 text-2xl">
+      <h2 className="text-center text-red-500 mt-10 text-2xl font-semibold animate-fade-in-up">
         ❌ Unauthorized Access
       </h2>
     );
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      {/* Header with Home button */}
+    <div className="p-6 max-w-6xl mx-auto">
+      {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Admin Panel</h1>
+        <h1 className="text-4xl font-bold text-white animate-fade-in-up">🛠️ Admin Panel</h1>
         <Link
           to="/"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="btn btn-primary hover-lift"
         >
           🏠 Home
         </Link>
       </div>
 
       {events.length === 0 ? (
-        <p className="text-center text-gray-600">No events found.</p>
+        <p className="text-center text-white/80 animate-fade-in-up">No events found.</p>
       ) : (
         events.map((event) => (
           <div
             key={event._id}
-            className="border p-4 mb-4 rounded shadow bg-white"
+            className="card mb-6 hover-lift animate-fade-in-up"
           >
             {editingEventId === event._id ? (
               <form
                 onSubmit={handleEditSubmit}
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
               >
                 {[
                   "title",
@@ -128,6 +128,7 @@ const AdminPanelPage = () => {
                     className="input-field"
                   />
                 ))}
+
                 <textarea
                   name="description"
                   value={formData.description || ""}
@@ -135,55 +136,57 @@ const AdminPanelPage = () => {
                   placeholder="Description"
                   className="input-field md:col-span-2"
                 />
-                <div className="col-span-2 space-x-2">
-                  <button type="submit" className="btn-primary">
+
+                <div className="col-span-2 space-x-3">
+                  <button type="submit" className="btn btn-primary">
                     💾 Save
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditingEventId(null)}
-                    className="btn-secondary"
+                    className="btn btn-secondary"
                   >
-                    Cancel
+                    ❌ Cancel
                   </button>
                 </div>
               </form>
             ) : (
               <>
-                <h2 className="text-xl font-bold">{event.title}</h2>
-                <p>{event.description}</p>
-                <p className="text-sm text-gray-600">
-                  {new Date(event.date).toLocaleDateString()} at {event.time}
-                </p>
-                <p className="text-sm">
+                <h2 className="text-2xl font-bold text-blue-900">{event.title}</h2>
+                <p className="text-gray-700">{event.description}</p>
+                <div className="text-sm text-gray-600 mt-1">
+                  📅 {new Date(event.date).toLocaleDateString()} | 🕒 {event.time}
+                </div>
+                <div className="text-sm text-gray-600">
                   Mode: {event.mode} | Venue: {event.venue}
-                </p>
-                <p className="text-sm">
-                  Fee: ₹{event.fee} | Max Participants:{" "}
-                  {event.maxParticipants}
-                </p>
-                <p className="text-sm">
-                  Organizer: {event.organizerName} ({event.organizerEmail})
-                </p>
-                <p className="text-sm text-blue-500">
-                  📌 Pinned: {event.isPinned ? "Yes" : "No"}
+                </div>
+                <div className="text-sm text-gray-600">
+                  🎟️ Fee: ₹{event.fee} | 👥 Max Participants: {event.maxParticipants}
+                </div>
+                <div className="text-sm text-gray-600">
+                  👤 Organizer: {event.organizerName} ({event.organizerEmail})
+                </div>
+                <p className="text-sm mt-1">
+                  📌 <span className={event.isPinned ? "text-green-600" : "text-red-500"}>
+                    {event.isPinned ? "Pinned" : "Not Pinned"}
+                  </span>
                 </p>
 
-                <div className="space-x-2 mt-2">
+                <div className="space-x-3 mt-3">
                   <button
-                    className="btn-secondary"
+                    className="btn btn-secondary"
                     onClick={() => handleEditClick(event)}
                   >
                     ✏️ Edit
                   </button>
                   <button
-                    className="btn-danger"
+                    className="btn btn-danger"
                     onClick={() => handleDelete(event._id)}
                   >
                     🗑️ Delete
                   </button>
                   <button
-                    className="btn-primary"
+                    className="btn btn-primary"
                     onClick={() => handlePinToggle(event._id)}
                   >
                     {event.isPinned ? "Unpin" : "📌 Pin"}

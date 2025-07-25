@@ -29,7 +29,6 @@ const registerParticipant = async (req, res) => {
   try {
     const { eventId, name, email, phone, college, role, motivation } = req.body;
 
-    // ✅ Increment registration count
     await EventModel.findByIdAndUpdate(
       eventId,
       { $inc: { registrations: 1 } },
@@ -54,8 +53,8 @@ const registerParticipant = async (req, res) => {
 // ✅ Delete an event by ID
 const deleteEvent = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleted = await EventModel.findByIdAndDelete(id);
+    const { eventId } = req.params;
+    const deleted = await EventModel.findByIdAndDelete(eventId);
 
     if (!deleted) {
       return res.status(404).json({ success: false, message: "Event not found" });
@@ -69,9 +68,57 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+// ✅ Update an event by ID
+const updateEvent = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const updatedEvent = await EventModel.findByIdAndUpdate(eventId, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedEvent) {
+      return res.status(404).json({ success: false, message: "Event not found" });
+    }
+
+    console.log("✏️ Event Updated:", updatedEvent.title);
+    res.status(200).json({ success: true, updatedEvent });
+  } catch (err) {
+    console.error("❌ Error updating event:", err.message);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// ✅ Toggle pin status for event
+const togglePin = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const event = await EventModel.findById(eventId);
+
+    if (!event) {
+      return res.status(404).json({ success: false, message: "Event not found" });
+    }
+
+    event.isPinned = !event.isPinned;
+    await event.save();
+
+    console.log(`📌 Event Pin Status Toggled: ${event.title} => ${event.isPinned}`);
+    res.status(200).json({
+      success: true,
+      message: `Event pin status toggled to ${event.isPinned}`,
+      event,
+    });
+  } catch (err) {
+    console.error("❌ Error toggling pin:", err.message);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 module.exports = {
   createEvent,
   getAllEvents,
   registerParticipant,
-  deleteEvent, // ✅ Exported
+  deleteEvent,
+  updateEvent,
+  togglePin,
 };
