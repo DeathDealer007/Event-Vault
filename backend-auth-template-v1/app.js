@@ -8,7 +8,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-const apiRouter = require("./api/v1"); // ✅ FIXED import
+const { apiRouter } = require("./api/v1/routes");
 
 const app = express();
 
@@ -25,9 +25,13 @@ const allowedOrigins = [
 app.use(
     cors({
         origin: function (origin, callback) {
-            if (!origin) return callback(null, true); // Allow curl, mobile
-            if (allowedOrigins.includes(origin)) return callback(null, true);
-            return callback(new Error("Not allowed by CORS"));
+            // Allow requests with no origin (e.g. curl, mobile apps)
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            } else {
+                return callback(new Error("Not allowed by CORS"));
+            }
         },
         credentials: true,
     })
@@ -38,7 +42,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use("/api/v1", apiRouter); // ✅ now works properly
+app.use("/api/v1", apiRouter);
 
 // Start server
 const PORT = process.env.PORT || 5000;

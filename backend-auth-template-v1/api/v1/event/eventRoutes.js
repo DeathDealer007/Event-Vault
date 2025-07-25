@@ -1,16 +1,37 @@
-// routes/eventRoutes.js
 const express = require("express");
 const router = express.Router();
 const {
   createEvent,
   getAllEvents,
   registerParticipant,
-  deleteEvent, // ✅ add this!
-} = require("./eventController");
+  deleteEvent,
+  updateEvent,
+  togglePin,
+} = require("../../api/v1/event/eventController");
 
-router.post("/", createEvent);
+const { userAuthenticationMiddleware } = require("../../middleware");
+
+// Middleware to check if user is admin
+const adminCheck = (req, res, next) => {
+  if (req.user?.email === "ankit19kumar2004@gmail.com") {
+    return next();
+  }
+  return res.status(403).json({
+    success: false,
+    message: "Unauthorized access — Admins only!",
+  });
+};
+
+// ✅ Public Routes
 router.get("/", getAllEvents);
 router.post("/participants", registerParticipant);
-router.delete("/:id", deleteEvent); // ✅ now this works
+
+// ✅ Protected Routes (require login)
+router.post("/", userAuthenticationMiddleware, createEvent);
+
+// ✅ Admin-only Routes
+router.delete("/:eventId", userAuthenticationMiddleware, adminCheck, deleteEvent);
+router.put("/:eventId", userAuthenticationMiddleware, adminCheck, updateEvent);
+router.patch("/:eventId/pin-toggle", userAuthenticationMiddleware, adminCheck, togglePin);
 
 module.exports = { eventRouter: router };
